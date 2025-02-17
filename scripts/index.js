@@ -6,6 +6,7 @@ const cardList = document.querySelector('.places__list')
 function createCard (cardData, deleteCallback) {
   const card = cardElemeent.querySelector('.card').cloneNode(true);
   card.querySelector('.card__image').src = cardData.link;
+  card.querySelector('.card__image').alt = cardData.name;
   card.querySelector('.card__title').textContent= cardData.name
   card.querySelector('.card__delete-button').addEventListener('click', deleteCallback)
   return card
