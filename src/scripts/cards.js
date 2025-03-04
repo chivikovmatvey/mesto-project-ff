@@ -47,12 +47,6 @@ export function createCard(
 export function delCard(event) {
   event.target.closest(".card").remove();
 }
-export function addCard(arrCards, cardList, deleteCallback, modalCallback, likeCallback) {
-  arrCards.forEach(item => {
-    const card = createCard(item, deleteCallback, modalCallback, likeCallback);
-    cardList.append(card);
-  });
-}
-export function statusLike(evt) {
+export function handleLikeButton(evt) {
   evt.target.classList.toggle("card__like-button_is-active");
 }

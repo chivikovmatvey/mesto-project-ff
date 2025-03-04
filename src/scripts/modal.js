@@ -1,18 +1,15 @@
-export function viewPopup(popupElement) {
-  popupElement.classList.toggle('popup_is-opened');
-  if (document.querySelector('.popup_is-opened')) {
-    document.addEventListener('keydown', closeEsc);
-  } else {
-    document.removeEventListener('keydown', closeEsc);
-  }
+export function openPopup(popupElement) {  
+  popupElement.classList.add('popup_is-opened');
+  document.addEventListener('keydown', closeEsc);
+ }
+export function closePopup(popupElement) {  
+  popupElement.classList.remove('popup_is-opened');
+  document.removeEventListener('keydown', closeEsc);
 }
-function closeEsc(evt) {
+export function closeEsc(evt) {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_is-opened');
-    if (openedPopup) {
-      openedPopup.classList.remove('popup_is-opened');
-      document.removeEventListener('keydown', closeEsc);
-    }
+    closePopup(openedPopup);
   }
 }
 export function initPopup(popup, togglePopupFunction) {
@@ -23,10 +20,4 @@ export function initPopup(popup, togglePopupFunction) {
       togglePopupFunction(popup);
     }
   });
-}
-export function createImgPopup(evt, popupImage, popupCaption, popupImg) {
-  popupImage.src = evt.target.src;
-  popupImage.alt = evt.target.alt;
-  popupCaption.textContent = evt.target.closest('.card').querySelector('.card__title').textContent;
-  viewPopup(popupImg);
 }
