@@ -1,5 +1,6 @@
 import '../pages/index.css';
-import { initialCards, createCard, delCard, handleLikeButton } from './cards.js';
+import { initialCards} from './cards.js';
+import { createCard, delCard, handleLikeButton } from './card.js';
 import { closePopup, openPopup, initPopup} from './modal.js';
 
 const cardList = document.querySelector('.places__list');
@@ -33,7 +34,7 @@ function handleFormEditSubmit(evt) {
   evt.preventDefault();
   profileTitle.textContent = nameInput.value;
   profileDescription.textContent = jobInput.value;
-  viewPopup(popupEdit);
+  closePopup(popupEdit);
 }
 function handleFormNewSubmit(evt) {
   evt.preventDefault();
@@ -44,7 +45,7 @@ function handleFormNewSubmit(evt) {
   const newCard = createCard(cardData, delCard, handleCardClick, handleLikeButton);
   formNew.reset();
   cardList.prepend(newCard);
-  viewPopup(popupNew);
+  closePopup(popupNew);
 }
 function createImgPopup(evt, popupImage, popupCaption, popupImg) {
   popupImage.src = evt.target.src;
