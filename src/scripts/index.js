@@ -74,18 +74,17 @@ function handleCardClick(evt) {
 function handleFormEditSubmit(evt) {
   evt.preventDefault();
   processLoading(formEditButton, true);
-  setNewUsrAbout(nameInput.value, jobInput.value);
-  getUsrInfo()
+  setNewUsrAbout(nameInput.value, jobInput.value)
     .then((res) => {
       profileTitle.textContent = res.name;
       profileDescription.textContent = res.about;
+      closePopup(popupEdit);
     })
     .catch((err) => {
       console.error('Ошибка при обновлении профиля:', err);
     })
     .finally(() => {
       processLoading(formEditButton, false);
-      closePopup(popupEdit);
     });
 }
 function handleFormNewSubmit(evt) {
@@ -102,13 +101,13 @@ function handleFormNewSubmit(evt) {
       );
       formNew.reset();
       cardList.prepend(newCard);
+      closePopup(popupNew);
     })
     .catch((err) => {
       console.error('Ошибка при добавлении карточки:', err);
     })
     .finally(() => {
       processLoading(formNewButton, false);
-      closePopup(popupNew);
     });
 }
 function handleFormAvatar(evt) {
@@ -118,13 +117,13 @@ function handleFormAvatar(evt) {
     .then(() => {
       profileImage.style = `background-image: url(${avatarInput.value});`;
       formAvatar.reset();
+      closePopup(popupAvatar);
     })
     .catch((err) => {
       console.error('Ошибка при обновлении аватара:', err);
     })
     .finally(() => {
       processLoading(formAvatarButton, false);
-      closePopup(popupAvatar);
     });
 }
 function createImgPopup(evt, popupImage, popupCaption, popupImg) {
