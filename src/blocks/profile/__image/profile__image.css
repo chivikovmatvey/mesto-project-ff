@@ -1,4 +1,5 @@
 .profile__image {
+  position: relative;
   width: 120px;
   height: 120px;
   -webkit-border-radius: 50%;
@@ -7,6 +8,35 @@
   background-size: cover;
   background-position: center;
   margin: 0 29px 0 0;
+}
+.profile__image::before{
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  transition: opacity 0.2s linear
+}
+.profile__image::after{
+  content: "";
+  align-self: center;
+  justify-self: center;
+  width: 20%;
+  height: 20%;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: transparent url('../../../images/edit-icon.svg') center no-repeat;
+  background-size: cover;
+  opacity: 0;
+  transition: opacity 0.2s linear
+}
+.profile__image:hover::before, 
+.profile__image:hover::after{
+  cursor: pointer;
+  opacity: 1;
 }
 
 @media screen and (max-width: 740px) {

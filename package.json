@@ -15,8 +15,11 @@
     "webpack-dev-server": "^5.2.0"
   },
   "scripts": {
-    "build": "rd /s /q dist && webpack",
-    "dev": "webpack serve --open"
+    "build-win": "rd /s /q dist && webpack",
+    "build-lin": "rm -rf dist && webpack",
+    "dev": "webpack serve --open",
+    "predeploy": "npm run build-win",
+    "deploy": "gh-pages -d dist"
   },
   "name": "mesto-project-ff",
   "version": "1.0.0",
@@ -51,6 +54,7 @@
     "find-up": "^4.1.0",
     "flat": "^5.0.2",
     "function-bind": "^1.1.2",
+    "gh-pages": "^6.3.0",
     "glob-to-regexp": "^0.4.1",
     "graceful-fs": "^4.2.11",
     "has-flag": "^4.0.0",
@@ -99,7 +103,7 @@
     "tapable": "^2.2.1",
     "terser": "^5.39.0",
     "terser-webpack-plugin": "^5.3.11",
-    "undici-types": "^6.20.0",
+    "undici-types": "^7.5.0",
     "update-browserslist-db": "^1.1.2",
     "watchpack": "^2.4.2",
     "webpack-merge": "^6.0.1",
