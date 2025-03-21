@@ -43,6 +43,8 @@ export function createCard(
 export function delCard(evt, cardData) {
   deleteCard(cardData._id).then(() => {
     evt.target.closest(".card").remove();
+  }).catch((err) => {
+    console.error('Ошибка при удалении карточки:', err);
   });
 }
 export function handleLikeButton(cardData, likeButton, countLikes) {
@@ -50,10 +52,14 @@ export function handleLikeButton(cardData, likeButton, countLikes) {
   if (likeButton.classList.contains("card__like-button_is-active")) {
     setLike(cardData._id).then((res) => {
       countLikes.textContent = res.likes.length;
+    }).catch((err) => {
+      console.error('Ошибка при добавлении лайка:', err);
     });
   } else {
     deleteLike(cardData._id).then((res) => {
       countLikes.textContent = res.likes.length;
+    }).catch((err) => {
+      console.error('Ошибка при удалении лайка:', err);
     });
   }
 }

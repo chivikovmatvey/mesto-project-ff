@@ -79,9 +79,12 @@ function handleFormEditSubmit(evt) {
     .then((res) => {
       profileTitle.textContent = res.name;
       profileDescription.textContent = res.about;
-      processLoading(formEditButton, false);
+    })
+    .catch((err) => {
+      console.error('Ошибка при обновлении профиля:', err);
     })
     .finally(() => {
+      processLoading(formEditButton, false);
       closePopup(popupEdit);
     });
 }
@@ -99,22 +102,28 @@ function handleFormNewSubmit(evt) {
       );
       formNew.reset();
       cardList.prepend(newCard);
-      processLoading(formNewButton, false);
+    })
+    .catch((err) => {
+      console.error('Ошибка при добавлении карточки:', err);
     })
     .finally(() => {
+      processLoading(formNewButton, false);
       closePopup(popupNew);
     });
 }
 function handleFormAvatar(evt) {
   evt.preventDefault();
   processLoading(formAvatarButton, true);
-  setNewAvatar(avatarInput.value);
-  getUsrInfo()
-    .then((res) => {
-      profileImage.style = `background-image: url(${res.avatar});`;
-      processLoading(formAvatarButton, false);
+  setNewAvatar(avatarInput.value)
+    .then(() => {
+      profileImage.style = `background-image: url(${avatarInput.value});`;
+      formAvatar.reset();
+    })
+    .catch((err) => {
+      console.error('Ошибка при обновлении аватара:', err);
     })
     .finally(() => {
+      processLoading(formAvatarButton, false);
       closePopup(popupAvatar);
     });
 }
@@ -138,12 +147,6 @@ popups.forEach((popup) => initPopup(popup, closePopup));
 profileEditButton.addEventListener("click", () => {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileDescription.textContent;
-  const inputList = Array.from(
-    formEdit.querySelectorAll(validationConfig.inputSelector)
-  );
-  inputList.forEach((inputElement) => {
-    checkInputValidity(formEdit, inputElement, validationConfig);
-  });
   clearValidation(formEdit, validationConfig);
   openPopup(popupEdit);
 });
@@ -154,6 +157,7 @@ profileAddButton.addEventListener("click", () => {
 });
 profileImage.addEventListener("click", () => {
   formAvatar.reset();
+  clearValidation(formAvatar, validationConfig);
   openPopup(popupAvatar);
 });
 formEdit.addEventListener("submit", handleFormEditSubmit);
