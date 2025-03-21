@@ -21,36 +21,34 @@ export const getInitialCards = () => {
 
 export const addNewCard = (name, link) => {
   return fetch(`${config.baseUrl}/cards`, {
-    method: 'POST',
+    method: "POST",
     headers: config.headers,
     body: JSON.stringify({
       name: name,
-      link: link
-    })
+      link: link,
+    }),
   }).then((res) => handleResponse(res));
 };
 
 export const deleteCard = (cardId) => {
-  console.log(cardId);
   return fetch(`${config.baseUrl}/cards/${cardId}`, {
-    method: 'DELETE',
+    method: "DELETE",
     headers: config.headers,
   }).then((res) => handleResponse(res));
 };
 
 export const setLike = (cardId) => {
   return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
-    method: 'PUT',
+    method: "PUT",
     headers: config.headers,
   }).then((res) => handleResponse(res));
 };
 export const deleteLike = (cardId) => {
   return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
-    method: 'DELETE',
+    method: "DELETE",
     headers: config.headers,
   }).then((res) => handleResponse(res));
 };
-
 
 export const getUsrInfo = () => {
   return fetch(`${config.baseUrl}/users/me`, {
@@ -60,21 +58,21 @@ export const getUsrInfo = () => {
 
 export const setNewUsrAbout = (name, title) => {
   return fetch(`${config.baseUrl}/users/me`, {
-    method: 'PATCH',
+    method: "PATCH",
     headers: config.headers,
     body: JSON.stringify({
       name: name,
-      about: title
-    })
+      about: title,
+    }),
   }).then((res) => handleResponse(res));
 };
 
 export const setNewAvatar = (avatar) => {
   return fetch(`${config.baseUrl}/users/me/avatar`, {
-    method: 'PATCH',
+    method: "PATCH",
     headers: config.headers,
     body: JSON.stringify({
       avatar: avatar,
-    })
+    }),
   }).then((res) => handleResponse(res));
 };
